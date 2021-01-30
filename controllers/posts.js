@@ -5,13 +5,11 @@ const Comment = require('../models/comment')
 postRouter.get('/', async(request, response) => {
   const posts = await Post
     .find({}).populate('comments')
-
   response.json(posts)
 })
 
 postRouter.get('/:id', async (request, response) => {
   const post = await Post.findById(request.params.id)
-
   if(post){
     response.json(post)
   }else{
