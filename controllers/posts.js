@@ -32,7 +32,10 @@ postRouter.post('/', async (request, response) => {
 })
 
 postRouter.post('/:id/comments', async (request, response) => {
-  const body = request.body
+
+
+  const body = request.body.data
+  console.log('received a request', body)
 
   const parentPost = await Post.findById(request.params.id)
 
