@@ -23,7 +23,7 @@ postRouter.post('/', async (request, response) => {
   const newPost = new Post({
     title: body.title,
     author: body.author,
-    date: Date.now().toString(),
+    date: new Date(Date.now()).toUTCString(),
     content: body.content
   })
 
