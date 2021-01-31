@@ -1,10 +1,12 @@
 const postRouter = require('express').Router()
 const Post = require('../models/post')
 const Comment = require('../models/comment')
+const jwt = require('jsonwebtoken')
+
 
 postRouter.get('/', async(request, response) => {
   const posts = await Post
-    .find({}).populate('comments')
+    .find({}).populate('comments').populate('users', {username: 1})
   response.json(posts)
 })
 
@@ -19,15 +21,25 @@ postRouter.get('/:id', async (request, response) => {
 
 postRouter.post('/', async (request, response) => {
   const body = request.body
+  const token = request.token
+  const decodedToken = jwt.verify(token, process.env.SECRET)
+  if(!token || !decodedToken.id){
+    return response.status(401).json({error: 'token missing or invalid'})
+  }
+  const user = await User.findById(body.userId)
 
   const newPost = new Post({
     title: body.title,
     author: body.author,
     date: new Date(Date.now()).toUTCString(),
-    content: body.content
+    content: body.content,
+    user: user.id
   })
 
   const savedPost = await newPost.save()
+  user.posts = user.posts.concat(savedPost.id)
+  await user.save()
+
   response.json(savedPost)
 })
 
