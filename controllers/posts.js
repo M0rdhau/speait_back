@@ -11,7 +11,7 @@ postRouter.get('/', async(request, response) => {
 })
 
 postRouter.get('/:id', async (request, response) => {
-  const post = await Post.findById(request.params.id)
+  const post = await Post.findById(request.params.id).populate('comments')
   if(post){
     response.json(post)
   }else{
@@ -26,7 +26,7 @@ postRouter.post('/', async (request, response) => {
   if(!token || !decodedToken.id){
     return response.status(401).json({error: 'token missing or invalid'})
   }
-  const user = await User.findById(body.userId)
+  const user = await User.findById(decodedToken.id)
 
   const newPost = new Post({
     title: body.title,
@@ -46,10 +46,10 @@ postRouter.post('/', async (request, response) => {
 postRouter.post('/:id/comments', async (request, response) => {
 
 
-  const body = request.body.data
+  const body = request.body
   console.log('received a request', body)
 
-  const parentPost = await Post.findById(request.params.id)
+  const parentPost = await Post.findById(request.params.id).populate('comments')
 
   const comment = new Comment({
     author: body.author,
@@ -62,7 +62,10 @@ postRouter.post('/:id/comments', async (request, response) => {
   parentPost.comments = parentPost.comments.concat(savedComment.id)
   await parentPost.save()
 
-  response.json(savedComment)
+  const parentPostWithComments = await Post.findById(parentPost.id).populate('comments')
+
+
+  response.json(parentPostWithComments)
 })
 
 
