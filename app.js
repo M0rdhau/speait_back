@@ -30,6 +30,7 @@ app.use('/api/posts', postsRouter)
 app.use('/feed.rss', rssRouter)
 // app.use('/api/users', usersRouter)
 // app.use('/api/login', loginRouter)
+app.use('/posts/*', express.static('build'))
 app.use(express.static('build'))
 
 app.use(middleware.unknownEndpoint)
