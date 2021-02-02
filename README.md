@@ -1,4 +1,5 @@
-# Social and Ethical Aspects of Information Technologies
+# Social, Professional and Ethical Aspects of Information Technologies
+# The Frontend
 
 We are on [Heroku](oxbaa.herokuapp.com) now!
 
