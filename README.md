@@ -1,3 +1,4 @@
 # Social and Ethical Aspects of Information Technologies
 
-the backend B-|
+We are on Heroku now!
+oxbaa.herokuapp.com
