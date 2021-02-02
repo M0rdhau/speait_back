@@ -1,3 +1,6 @@
 # Social and Ethical Aspects of Information Technologies
 
-the backend B-|
+We are on [Heroku](oxbaa.herokuapp.com) now!
+
+### Master - Heroku branch
+### Main - Admin page branch
