@@ -21,14 +21,14 @@ rssRouter.get('/',  async (request, response) => {
           {
             'atom:link': {
               _attr: {
-                href: 'https://localhost:3001/feed.rss',
+                href: 'https://oxbaa.herokuapp.com/feed.rss',
                 rel: 'self',
                 type: 'application/rss+xml'
               }
             }
           },
           { title: 'Does AI dream of Hexadecimal sheep?' },
-          { link: 'https://localhost:3001' },
+          { link: 'oxbaa.herokuapp.com' },
           { description: 'A blog (mostly) for TalTech SPEAIT course' },
           { language: 'en-us' },
           ...posts.map((post) => {
