@@ -32,7 +32,7 @@ rssRouter.get('/',  async (request, response) => {
           { description: 'A blog (mostly) for TalTech SPEAIT course' },
           { language: 'en-us' },
           ...posts.map((post) => {
-            const absoluteHREF = 'https://oxbaa.herokuapp.com/' + post.id
+            const absoluteHREF = 'https://oxbaa.herokuapp.com/posts/' + post.id
             return {
               item: [
                 {title: post.title},
