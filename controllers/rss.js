@@ -13,7 +13,8 @@ rssRouter.get('/',  async (request, response) => {
       {
         _attr: {
           version: '2.0',
-          'xmlns:atom': 'http://www.w3.org/2005/Atom'
+          'xmlns:atom': 'http://www.w3.org/2005/Atom',
+          'xml:lang': 'en'
         }
       },
       {
@@ -39,8 +40,7 @@ rssRouter.get('/',  async (request, response) => {
                 {pubDate: post.date},
                 {link: absoluteHREF},
                 {guid: absoluteHREF},
-                {description: {_cdata: marked(post.content.substring(0,30))}},
-                {content: {_cdata: marked(post.content)}}
+                {description: {_cdata: marked(post.content)}}
               ]
             }
           })
